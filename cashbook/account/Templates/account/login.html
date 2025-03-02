@@ -1,0 +1,47 @@
+{% extends 'account/base_account.html' %}
+{% load static %}
+
+{% block content %}
+<div class="right-section">
+    <h2 style="text-align: center">USER LOGIN</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Add form validation errors for username and password -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            {{ form.username }}
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            {{ form.password }}
+        </div>
+        
+        <div class="remember-forgot">
+            <label> <input type="checkbox" name="remember" /> Remember me </label>
+            <a href="#">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+        
+        <a href="#" class="google-btn">
+            <img src="https://cdn.cdnlogo.com/logos/g/35/google-icon.svg" width="20" height="20" alt="Google" />
+            Continue with Google
+        </a>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="{% url 'register' %}">Sign Up</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}
