@@ -1,0 +1,197 @@
+{% extends 'store/base_store.html'%}
+{%load static%}
+{%block CSS%}
+<link rel="stylesheet" href="{% static 'css/purchase.css'%}">
+{%endblock%}
+{% block content %}
+<div class="purchase-history-container">
+    <div class="page-header">
+        <div class="header-content">
+            <h2>Purchase History</h2>
+            <p>Track all customer purchases and seller information</p>
+        </div>
+        <div class="header-actions">
+            <div class="date-filter">
+                <i class="fas fa-calendar"></i>
+                <select>
+                    <option>Last 30 days</option>
+                    <option>Last 90 days</option>
+                    <option>Last 6 months</option>
+                    <option>Last year</option>
+                    <option>All time</option>
+                </select>
+            </div>
+            <button class="export-btn">
+                <i class="fas fa-download"></i>
+                Export Data
+            </button>
+        </div>
+    </div>
+
+    <div class="filters-section">
+        <div class="search-filters">
+            <div class="filter-group">
+                <label>Seller:</label>
+                <select>
+                    <option>All Sellers</option>
+                    <option>Premium Sellers</option>
+                    <option>New Sellers</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status:</label>
+                <select>
+                    <option>All Status</option>
+                    <option>Completed</option>
+                    <option>Processing</option>
+                    <option>Shipped</option>
+                    <option>Cancelled</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Amount Range:</label>
+                <select>
+                    <option>All Amounts</option>
+                    <option>$0 - $50</option>
+                    <option>$51 - $200</option>
+                    <option>$201 - $500</option>
+                    <option>$500+</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="purchase-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="th-content">
+                                Order ID
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Customer
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Seller
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Products
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Amount
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Status
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                Date
+                                <i class="fas fa-sort"></i>
+                            </div>
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD-2024-2853</td>
+                        <td>
+                            <div class="customer-cell">
+                                <img src="/api/placeholder/32/32" alt="Customer" class="customer-avatar">
+                                <div class="customer-info">
+                                    <div class="name">Emily Thompson</div>
+                                    <div class="email">emily.t@example.com</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="seller-cell">
+                                <div class="seller-info">
+                                    <div class="name">TechHub Store</div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        4.8
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="products-cell">
+                                <span class="product-count">3 items</span>
+                                <div class="product-list">
+                                    <span>Wireless Earbuds</span>
+                                    <span>Phone Case</span>
+                                    <span>Screen Protector</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="amount-cell">
+                                <div class="amount">$245.99</div>
+                                <div class="payment">Via Credit Card</div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge completed">Completed</span>
+                        </td>
+                        <td>
+                            <div class="date-cell">
+                                <div class="date">Feb 10, 2024</div>
+                                <div class="time">14:30 PM</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions-cell">
+                                <button class="action-btn view-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn download-btn">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- More rows with similar structure but different data -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <div class="showing-entries">
+                Showing 1 to 10 of 253 entries
+            </div>
+            <div class="pagination">
+                <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="page-separator">...</span>
+                <button class="page-btn">25</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{%block JS%}
+<script src="{% static 'js/purchase.js'%}"></script>
+{%endblock JS%}

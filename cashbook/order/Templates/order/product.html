@@ -1,0 +1,135 @@
+{%extends 'store/base_store.html'%}
+{%load static%}
+{%block CSS%}
+<link rel="stylesheet" href="{%static 'css/product.css'%}">
+{%endblock CSS%}
+{%block content%}
+<div class="products-section">
+    <div class="section-header">
+        <h2>Products Management</h2>
+        <button class="add-product-btn" type="button">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Add New Product</span>
+        </button>
+    </div>
+
+    <div class="table-container">
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="/api/placeholder/50/50" alt="Product 1" class="product-image">
+                    </td>
+                    <td>Wireless Headphones</td>
+                    <td>Electronics</td>
+                    <td>$129.99</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" aria-label="Decrease quantity">-</button>
+                            <input type="number" value="24" min="0" class="quantity-input">
+                            <button class="quantity-btn" aria-label="Increase quantity">+</button>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-badge in-stock">In Stock</span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="edit-btn" aria-label="Edit product">
+                                <i class="fas fa-edit" style="font-size: large; color: #2563eb;"></i>
+                            </button>
+                            <button class="delete-btn" aria-label="Delete product">
+                                <i class="fas fa-trash" style="font-size: large; color: #ef4444;"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- More product rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}
+{%block additional%}
+<div class="modal" id="addProductModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New Product</h3>
+            <button class="close-btn" id="closeProductModal" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="addProductForm" class="product-form">
+            <div class="form-group">
+                <label for="productImage">Product Image</label>
+                <div class="image-upload">
+                    <input type="file" id="productImage" name="productImage" accept="image/*">
+                    <div class="upload-placeholder">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Click to upload image</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="productCategory">Category</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="food">Food & Beverages</option>
+                        <option value="home">Home & Garden</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Price</label>
+                    <input type="number" id="productPrice" name="productPrice" min="0" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="productQuantity">Initial Quantity</label>
+                    <input type="number" id="productQuantity" name="productQuantity" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productSKU">SKU</label>
+                    <input type="text" id="productSKU" name="productSKU">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="productDescription">Description</label>
+                <textarea id="productDescription" name="productDescription" rows="3"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelProductBtn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
+{%block JS%}
+<script src="{%static 'js/product.js'%}"></script>
+{%endblock JS%}

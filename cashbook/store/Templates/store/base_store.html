@@ -1,11 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <!-- Chart.js for graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/base_store.css' %}">
+    {%block CSS%}
+    
+    {%endblock CSS%}
 </head>
+
 <body>
-    <h1>Hello World</h1>
+    <div class="page-wrapper">
+        <div class="sidebar">
+            <h2>AdminPanel</h2>
+            <ul class="sidebar-menu">
+                <li class="menu-header">Seller Management</li>
+                <li><a href="{% url 'product' %}"><i class="fas fa-check-circle icons"></i>Sellers Products</a></li>
+                <li><a href="{% url 'seller' %}"><i class="fas fa-users icons"></i>Manage Sellers</a></li>
+                <li><a href="#'"><i class="fas fa-cog icons"></i>Seller Settings</a></li>
+
+                <li class="menu-header">Customer Insights</li>
+                <li><a href="#"><i class="fas fa-chart-pie icons"></i>View Customers</a></li>
+                <li><a href="{% url 'customer-insights'%}"><i class="fas fa-users icons"></i>Customers Insights</a></li>
+                <li><a href="{% url 'purchase' %}""><i class="fas fa-history icons"></i>Purchase History</a></li>
+
+                <li class="menu-header">Inventory Management</li>
+                <li><a href="#"><i class="fas fa-box icons"></i>Stock Overview</a></li>
+                <li><a href="#"><i class="fas fa-truck icons"></i>Shipments</a></li>
+                <li><a href="#"><i class="fas fa-warehouse icons"></i>Warehouses</a></li>
+                <li><a href="#"><i class="fas fa-chart-pie icons"></i>Inventory Analysis</a></li>
+
+                <li><a href="#" class="highlight-btn"><i class="fas fa-plus-circle"></i>Create New Order</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="header">
+                <div class="search-container">
+                    <i class='bx bx-search'></i>
+                    <input type="text" class="search-bar" placeholder="Search...">
+                </div>
+                <div class="user-info">
+                    <div class="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="notification-dot"></div>
+                    </div>
+                    <div class="admin-info">
+                        <div class="admin-name">John Doe</div>
+                        <div class="admin-role">Administrator</div>
+                    </div>
+                    <div class="admin-avatar">
+                        <i class='bx bx-user'></i>
+                    </div>
+                </div>
+            </div>
+            {% block content %}
+            
+            {% endblock%}
+
+    </div>
+    {% block additional%}
+    {% endblock%}
+   <script src="{% static 'js/base_store.js' %}"></script>
+   {% block JS%}
+   {% endblock JS%}
 </body>
 </html>

@@ -1,0 +1,136 @@
+<!-- Icons section -->
+{% extends 'store/base_store.html' %}
+{% load static%}
+<!-- Css section -->
+{% block CSS %}
+<link rel="stylesheet" href="{% static 'css/seller-page.css'%}">
+{% endblock CSS%}
+<!-- Html section -->
+{%block content%}
+<div class="sellers-section">
+    <div class="section-header">
+        <h2>Sellers Management</h2>
+        <button class="add-seller-btn" type="button">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span>Add New Seller</span>
+        </button>
+    </div>
+    <div class="table-container">
+        <table class="sellers-table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Active Status</th>
+                    <th scope="col">Products</th>
+                    <th scope="col">Total Purchase</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Smith</td>
+                    <td>john.smith@email.com</td>
+                    <td>+1 234-567-8900</td>
+                    <td>
+                        <label class="switch" role="switch" aria-checked="true">
+                            <input type="checkbox" checked>
+                            <span class="switch__slider">
+                                <span class="switch__handle"></span>
+                            </span>
+                        </label>
+                    </td>
+                    <td>45</td>
+                    <td>$12,450</td>
+                    <td>
+                        <button class="delete-btn" type="button" aria-label="Delete seller">
+                            <i class="fas fa-trash" aria-hidden="true" style="color:red; font-size: large;"></i>
+                        </button>
+                    </td>
+                </tr>
+                <!-- More rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}
+{% block additional%}
+<div class="modal" id="addSellerModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New Seller</h3>
+            <button class="close-btn" id="closeModal" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="addSellerForm" class="seller-form">
+            <div class="form-group">
+                <label for="sellerName">Full Name *</label>
+                <input type="text" id="sellerName" name="sellerName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sellerEmail">Email Address *</label>
+                <input type="email" id="sellerEmail" name="sellerEmail" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sellerPhone">Phone Number *</label>
+                <input type="tel" id="sellerPhone" name="sellerPhone" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sellerCompany">Company Name</label>
+                    <input type="text" id="sellerCompany" name="sellerCompany">
+                </div>
+
+                <div class="form-group">
+                    <label for="sellerWebsite">Website</label>
+                    <input type="url" id="sellerWebsite" name="sellerWebsite" placeholder="https://">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sellerAddress">Business Address</label>
+                <textarea id="sellerAddress" name="sellerAddress" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sellerCategory">Business Category</label>
+                    <select id="sellerCategory" name="sellerCategory">
+                        <option value="">Select Category</option>
+                        <option value="retail">Retail</option>
+                        <option value="wholesale">Wholesale</option>
+                        <option value="manufacturer">Manufacturer</option>
+                        <option value="service">Service Provider</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sellerTax">Tax ID</label>
+                    <input type="text" id="sellerTax" name="sellerTax">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="sellerActive" name="sellerActive" checked>
+                    Set account as active
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Seller</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock%}
+<!-- Js section -->
+{% block JS %}
+<script src="{% static 'js/seller-page.js' %}"></script>
+{% endblock JS %}

@@ -1,0 +1,198 @@
+{% extends 'store/base_store.html'%}
+{% load static%}
+{% block CSS %}
+<link rel="stylesheet" href="{% static 'css/customer-insights.css' %}">
+{% endblock CSS%}
+{% block content%}
+<div class="dashboard-container">
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="metric-info">
+                <h3>Total Customers</h3>
+                <p class="metric-value">24,853</p>
+                <p class="metric-change positive">+12.5% vs last month</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="metric-info">
+                <h3>Average Order Value</h3>
+                <p class="metric-value">$124.50</p>
+                <p class="metric-change positive">+5.2% vs last month</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="metric-info">
+                <h3>Customer Lifetime Value</h3>
+                <p class="metric-value">$842.30</p>
+                <p class="metric-change positive">+8.1% vs last month</p>
+            </div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="metric-info">
+                <h3>NPS Score</h3>
+                <p class="metric-value">72</p>
+                <p class="metric-change positive">+3 vs last month</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-card">
+            <h3>Product Category Performance</h3>
+            <canvas id="customerGrowthChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Customer Churn Risk Analysis</h3>
+            <canvas id="churnRiskChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Customer Journey Funnel</h3>
+            <canvas id="customerFunnelChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>Customer Segment Analysis</h3>
+            <canvas id="customerSegmentsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="insights-grid">
+        <div class="insight-card customer-behavior">
+            <h3>Customer Behavior Insights</h3>
+            <div class="behavior-metrics">
+                <div class="behavior-metric">
+                    <span class="label">Browse-to-Purchase Rate</span>
+                    <span class="value">23.4%</span>
+                    <span class="trend positive">↑ 2.1%</span>
+                </div>
+                <div class="behavior-metric">
+                    <span class="label">Cart Abandonment Rate</span>
+                    <span class="value">31.2%</span>
+                    <span class="trend negative">↑ 1.5%</span>
+                </div>
+                <div class="behavior-metric">
+                    <span class="label">Average Session Duration</span>
+                    <span class="value">8m 24s</span>
+                    <span class="trend positive">↑ 42s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-card customer-satisfaction">
+            <h3>Satisfaction Metrics</h3>
+            <div class="satisfaction-breakdown">
+                <div class="satisfaction-metric">
+                    <span class="label">Product Quality Rating</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 92%"></div>
+                    </div>
+                    <span class="value">4.6/5</span>
+                </div>
+                <div class="satisfaction-metric">
+                    <span class="label">Customer Service Rating</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 88%"></div>
+                    </div>
+                    <span class="value">4.4/5</span>
+                </div>
+                <div class="satisfaction-metric">
+                    <span class="label">Delivery Experience</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 86%"></div>
+                    </div>
+                    <span class="value">4.3/5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-customers">
+        <div class="section-header">
+            <h3>High-Value Customer Watchlist</h3>
+            <div class="filter-controls">
+                <select class="segment-filter">
+                    <option>All Segments</option>
+                    <option>VIP</option>
+                    <option>At Risk</option>
+                    <option>New</option>
+                </select>
+                <button class="view-all-btn">View All</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Segment</th>
+                        <th>Lifetime Value</th>
+                        <th>Recent Activity</th>
+                        <th>Churn Risk</th>
+                        <th>Next Best Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="customer-info">
+                                <img src="/api/placeholder/32/32" alt="Sarah J." class="customer-avatar" />
+                                <div>
+                                    <div class="customer-name">Sarah Johnson</div>
+                                    <div class="customer-email">sarah.j@example.com</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge vip">VIP</span></td>
+                        <td>$4,242.50</td>
+                        <td>
+                            <div class="activity-info">
+                                <span class="activity-type">Purchase</span>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </td>
+                        <td><span class="risk-level low">Low</span></td>
+                        <td><span class="action-badge">Send loyalty reward</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="customer-info">
+                                <img src="/api/placeholder/32/32" alt="Michael C." class="customer-avatar" />
+                                <div>
+                                    <div class="customer-name">Michael Chen</div>
+                                    <div class="customer-email">m.chen@example.com</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge at-risk">At Risk</span></td>
+                        <td>$2,856.00</td>
+                        <td>
+                            <div class="activity-info">
+                                <span class="activity-type">Cart Abandon</span>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </td>
+                        <td><span class="risk-level high">High</span></td>
+                        <td><span class="action-badge urgent">Send recovery offer</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
+{%block JS%}
+<script src="{% static 'js/customer-insights.js'%}"></script>
+{%endblock JS%}
