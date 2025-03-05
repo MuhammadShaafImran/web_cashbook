@@ -52,7 +52,9 @@
                         <div class="notification-dot"></div>
                     </div>
                     <div class="admin-info">
-                        <div class="admin-name">John Doe</div>
+                        <div class="admin-name">
+                            {{request.user.username}}
+                        </div>
                         <div class="admin-role">Administrator</div>
                     </div>
                     <div class="admin-avatar">
