@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+Xdocument.addEventListener('DOMContentLoaded', function() {
     // Product Category Performance Chart
     const growthCtx = document.getElementById('customerGrowthChart').getContext('2d');
     new Chart(growthCtx, {
