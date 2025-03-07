@@ -1,4 +1,3 @@
-from PIL.ImageCms import Flags
 from django.db import models
 from ..account.models import Seller,Customer
 from ..payment.models import Shipment
