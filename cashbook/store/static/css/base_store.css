@@ -146,6 +146,7 @@
 .admin-name {
     font-weight: 500;
     color: #1e293b;
+    text-transform: capitalize;
 }
 
 .admin-role {

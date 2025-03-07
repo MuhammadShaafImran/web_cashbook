@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'css/base_store.css' %}">
+    <link rel="stylesheet" href="{% static 'css/new_order.css' %}">
     {%block CSS%}
     
     {%endblock CSS%}
@@ -37,7 +38,7 @@
                 <li><a href="#"><i class="fas fa-warehouse icons"></i>Warehouses</a></li>
                 <li><a href="#"><i class="fas fa-chart-pie icons"></i>Inventory Analysis</a></li>
 
-                <li><a href="#" class="highlight-btn"><i class="fas fa-plus-circle"></i>Create New Order</a></li>
+                <li><a href="{% url 'new-order' %}" class="highlight-btn"><i class="fas fa-plus-circle"></i>Create New Order</a></li>
             </ul>
         </div>
         <div class="main-content">
@@ -70,6 +71,7 @@
     {% block additional%}
     {% endblock%}
    <script src="{% static 'js/base_store.js' %}"></script>
+   <script src="{% static 'js/new_order.js' %}"></script>
    {% block JS%}
    {% endblock JS%}
 </body>
