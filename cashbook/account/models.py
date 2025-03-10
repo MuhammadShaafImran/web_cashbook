@@ -24,6 +24,7 @@ class Seller(models.Model):
         (DISTRIBUTOR, 'Distributor'),
     ]
 
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default=None)
     seller_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=False)
     phone = models.CharField(max_length=15, blank=False)
@@ -46,7 +47,8 @@ class Customer(models.Model):
         regex=r'^\d{10,15}$',
         message="Phone number must be 10-15 digits."
     )
-
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default = None)
     customer_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=False)
     phone = models.CharField(max_length=15, unique=True, validators=[phone_regex], blank=False)

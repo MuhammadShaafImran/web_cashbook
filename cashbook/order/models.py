@@ -1,12 +1,10 @@
-from tkinter.constants import CASCADE
-
 from django.db import models
-from ..account.models import Customer
-from ..store.models import Product
+from account.models import Customer
+from store.models import Product
 from django.core.validators import MinValueValidator
 
 class OrderItem(models.Model):
-    order_item_ID = models.AutoField(primary_key=True)
+    orderItem_ID = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(validators=[MinValueValidator(1)], blank=False)
     total = models.IntegerField(validators=[MinValueValidator(0)], default=0)
@@ -23,8 +21,8 @@ class Order(models.Model):
     Todo: Add def __save__ for total
     """
     order_id = models.AutoField(primary_key=True)
-    order_item_ID = models.ForeignKey(OrderItem, on_delete=CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, to_field='customer_id')
+    orderItem = models.ForeignKey(OrderItem, on_delete= models.CASCADE,default=None)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, to_field='customer_id', default=None)
     total = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
 

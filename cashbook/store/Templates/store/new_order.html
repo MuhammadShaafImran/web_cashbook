@@ -1,97 +1,191 @@
-{% extends 'store/base_store.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'store/base_store.html' %} {% load static %} {% block content %}
 <div class="content-wrapper">
-    <div class="content-header">
-        <h1>Create Order</h1>
-    </div>
+  <div class="content-header">
+    <h1>Create Order</h1>
+  </div>
 
-    <div class="order-form-container">
-        <form id="orderForm">
-            <!-- Customer Details Section -->
-            <div class="form-section">
-                <h3>Customer Details</h3>
-                <div class="form-row">
-                    <div class="form-group autocomplete-container">
-                        <label for="customerName">Customer Name</label>
-                        <input type="text" id="customerName" class="form-control" placeholder="Enter customer name">
-                        <div class="autocomplete-suggestions" id="customerNameSuggestions"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="customerEmail">Email</label>
-                        <input type="email" id="customerEmail" class="form-control" placeholder="Enter email">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="customerPhone">Phone</label>
-                        <input type="tel" id="customerPhone" class="form-control" placeholder="Enter phone number">
-                    </div>
-                    <div class="form-group">
-                        <label for="customerAddress">Address</label>
-                        <input type="text" id="customerAddress" class="form-control" placeholder="Enter address">
-                    </div>
-                </div>
-            </div>
+  <div class="order-form-container">
+    <form id="orderForm" method="POST" action="{% url 'home' %}">
+      {% csrf_token %}
+      <!-- Process Steps -->
+      <div class="process-steps">
+        <div class="step active" data-step="1" onclick="move_next()">
+          <i class="fas fa-user"></i>
+          <span>Customer Details</span>
+        </div>
+        <div class="step" data-step="2" onclick="move_next()">
+          <i class="fas fa-credit-card"></i>
+          <span>Seller Details</span>
+        </div>
+        <div class="step" data-step="3" onclick="move_next()">
+          <i class="fas fa-box"></i>
+          <span>Product Details</span>
+        </div>
+        <div class="step" data-step="4" onclick="move_next()">
+          <i class="fas fa-truck"></i>
+          <span>Shipping Details</span>
+        </div>
+        <div class="step" data-step="5" onclick="move_next()">
+          <i class="fas fa-credit-card"></i>
+          <span>Payment Details</span>
+        </div>
+      </div>
 
-            <!-- Product Details Section -->
-            <div class="form-section">
-                <h3>Product Details</h3>
-                <div id="productsList">
-                    <div class="product-item">
-                        <div class="form-row">
-                            <div class="form-group autocomplete-container">
-                                <label for="productName1">Product Name</label>
-                                <input type="text" id="productName1" class="form-control product-name" placeholder="Enter product name">
-                                <div class="autocomplete-suggestions" id="productNameSuggestions1"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="productQty1">Quantity</label>
-                                <input type="number" id="productQty1" class="form-control product-qty" placeholder="Enter quantity" min="1" value="1">
-                            </div>
-                            <div class="form-group">
+      <!-- Customer Details Section -->
+      <div class="form-section card active" data-step="1">
+        <h3>Customer Details</h3>
+        <div class="form-row">
+          <div class="form-group autocomplete-container">
+            <label for="customerName">Customer Name</label>
+            <input
+              type="text"
+              id="customerName"
+              class="form-control"
+              placeholder="Enter customer name"
+            />
+            <div
+              class="autocomplete-suggestions"
+              id="customerNameSuggestions"
+            ></div>
+          </div>
+          <div class="form-group">
+            <label for="customerEmail">Email</label>
+            <input
+              type="email"
+              id="customerEmail"
+              class="form-control"
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="customerPhone">Phone</label>
+            <input
+              type="tel"
+              id="customerPhone"
+              class="form-control"
+              placeholder="Enter phone number"
+            />
+          </div>
+          <div class="form-group">
+            <label for="customerAddress">Address</label>
+            <input
+              type="text"
+              id="customerAddress"
+              class="form-control"
+              placeholder="Enter address"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Seller Details Section -->
+      <div class="form-section card" data-step="2">
+        <h3>Seller Details</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sellerName">Seller Name</label>
+            <input
+              type="text"
+              id="sellerName"
+              class="form-control"
+              placeholder="Enter seller name"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Product Details Section -->
+      <div class="form-section card" data-step="3">
+        <h3>Product Details</h3>
+        <div id="productsList">
+          <div class="product-item">
+            <div class="form-row">
+              <div class="form-group autocomplete-container">
+                <label for="productName1">Product Name</label>
+                <input
+                  type="text"
+                  id="productName1"
+                  class="form-control product-name"
+                  placeholder="Enter product name"
+                />
+                <div
+                  class="autocomplete-suggestions"
+                  id="productNameSuggestions1"
+                ></div>
+              </div>
+              <div class="form-group">
+                <label for="productQty1">Quantity</label>
+                <input
+                  type="number"
+                  id="productQty1"
+                  class="form-control product-qty"
+                  placeholder="Enter quantity"
+                  min="1"
+                  value="1"
+                />
+              </div>
+              <!-- <div class="form-group">
                                 <label for="productPrice1">Price</label>
                                 <input type="text" id="productPrice1" class="form-control product-price" placeholder="Price" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" id="addProductBtn" class="btn-create-order" style="margin-right: 10px; background-color: #28a745;">
-                    <i class="fas fa-plus"  style="padding-right: 10px;"></i> Add Another Product
-                </button>
+                            </div> -->
+              <button type="button" id="addProductBtn" class="btn-create-order">
+                <i class="fas fa-plus"></i>
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Seller Details Section -->
-            <div class="form-section">
-                <h3>Seller Details</h3>
-                <div class="form-row">
-                    <div class="form-group autocomplete-container">
-                        <label for="sellerName">Seller Name</label>
-                        <input type="text" id="sellerName" class="form-control" placeholder="Enter seller name">
-                        <div class="autocomplete-suggestions" id="sellerNameSuggestions"></div>
-                    </div>
-                </div>
-            </div>
+      <!-- Shipping Details Section -->
+      <div class="form-section card" data-step="4">
+        <h3>Shipping Details</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="shippingMethod">Shipping Method</label>
+            <select id="shippingMethod" class="form-control">
+              <option value="standard">Standard Shipping</option>
+              <option value="express">Express Shipping</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="shippingAddress">Shipping Address</label>
+            <input
+              type="text"
+              id="shippingAddress"
+              class="form-control"
+              placeholder="Enter shipping address"
+            />
+          </div>
+        </div>
+      </div>
 
-            <!-- Total Section -->
-            <div class="form-section total-section">
-                <div class="form-row">
-                    <div>
-                        <h3>Order Summary</h3>
-                        <div>Total Items: <span id="totalItems">1</span></div>
-                    </div>
-                    <div>
-                        <div>Total Price:</div>
-                        <div class="total-price">$<span id="totalPrice">0.00</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-create-order">
-                <i class="fas fa-check" style="padding-right: 10px;"></i> Create Order
-            </button>
-        </form>
-    </div>
+      <!-- Payment Details Section -->
+      <div class="form-section card" data-step="5">
+        <h3>Payment Details</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" class="form-control">
+              <option value="credit_card">Credit Card</option>
+              <option value="paypal">PayPal</option>
+              <option value="bank_transfer">Bank Transfer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              class="form-control"
+              placeholder="Enter card number"
+            />
+          </div>
+        </div>
+      </div>
+      <button id="create-order" class="btn-create-order">
+        <i class="fas fa-plus"></i> Create Order
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock %}

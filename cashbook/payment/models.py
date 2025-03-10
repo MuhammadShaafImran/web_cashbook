@@ -1,6 +1,7 @@
 from django.db import models
-from ..order.models import Order
-from ..account.models import Customer
+from order.models import Order
+from account.models import Customer
+from django.core.validators import MinValueValidator
 
 class Shipment(models.Model):
     CARD = 'Card'
@@ -22,3 +23,15 @@ class Shipment(models.Model):
 
     def __str__(self):
         return f"Shipment: {self.shipment_id} for Order: {self.order.order_id}"
+    
+class Record(models.Model):
+    record_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    shipment = models.ForeignKey(Shipment, on_delete=models.CASCADE)
+    credit = models.IntegerField(validators=[MinValueValidator(0)])
+    debit = models.IntegerField(validators=[MinValueValidator(0)])
+    current = models.IntegerField(validators=[MinValueValidator(0)])
+    
+    def __str__(self):
+        return f"Record {self.record_id} for {self.customer.name}"
